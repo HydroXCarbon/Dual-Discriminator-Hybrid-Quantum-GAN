@@ -19,12 +19,12 @@ Follow the steps below to set up the environment and install the necessary packa
 ### 1. Create Conda Environment
 
 ```bash
-conda create --name hqgan python=3.8
+conda create --name ddhqgan python=3.8
 ```
 
 ### 2. Activate Conda Environment
 ```bash
-conda activate hqgan
+conda activate ddhqgan
 ```
 
 ### 3. Install requirement packages
