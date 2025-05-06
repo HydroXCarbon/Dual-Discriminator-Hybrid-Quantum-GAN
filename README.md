@@ -19,15 +19,17 @@ Follow the steps below to set up the environment and install the necessary packa
 ### 1. Create Conda Environment
 
 ```bash
-conda create --name ddhqgan python=3.8
+conda create --name ddhqgan python=3.12.4
 ```
 
 ### 2. Activate Conda Environment
+
 ```bash
 conda activate ddhqgan
 ```
 
 ### 3. Install requirement packages
+
 ```bash
 pip install .
 ```
@@ -51,4 +53,5 @@ jupyter notebook src/main.ipynb
 ```
 
 ### Contributing
+
 Feel free to fork this repository and make your own contributions. Pull requests are welcome!
