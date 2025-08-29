@@ -144,7 +144,7 @@ Contributions are welcome. Please open an issue to discuss major changes, and su
 
 ## License
 
-See the LICENSE file in the project root for licensing details (add one if not present).
+See the LICENSE file in the project root for licensing details.
 
 ## Contact
 
