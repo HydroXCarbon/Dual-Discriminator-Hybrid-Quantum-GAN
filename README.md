@@ -32,6 +32,7 @@ DDHQ-GAN/
 ├── src/
 │   ├── main.py               # CLI entrypoint (run training/eval)
 │   ├── main.ipynb            # paired notebook kept with src code (deprecated)
+│   ├── Model Summary.ipynb   # notebook to show parameter counts for selected model
 │   ├── features/             # feature extraction, loaders and experiment utilities
 │   │   ├── featurize.py
 │   │   ├── loader.py         # dataset loaders and helpers
@@ -116,24 +117,16 @@ jupyter notebook src/main.ipynb
 
 Note: The notebook in `src/` is deprecated and may not be fully functional. For reliable, reproducible workflows prefer using the CLI (`python src/main.py`) or scripts in `src/examples/` which are kept runnable.
 
-## Examples
-
-- src/notebooks/main.ipynb — walkthrough of training and sampling
-- src/examples/ (if present) — quick scripts demonstrating common tasks
-
 ## Training & Evaluation
 
-- Launch training or evaluation using `python src/main.py` or the example scripts under `src/examples/`.
-- Use `src/features/loader.py` (and related helpers in `src/features/`) to prepare datasets and data loaders.
-- Checkpoints and logging hooks are managed by utilities in `src/features/` or `src/examples/` (e.g., wandb_utils).
-
-## Testing
-
-Run unit and integration tests (if provided):
+- Edit `config.yml` first to set dataset paths, model selection, training hyperparameters, logging and checkpoint directories.
+- Launch training or evaluation using the configured file:
 
 ```bash
-pytest notebooks/tests/
+python src/main.py
 ```
+
+- Use `src/features/loader.py` (and related helpers in `src/features/`) to prepare datasets and data loaders. Checkpoints and logging hooks are managed by utilities in `src/features/` (e.g., `wandb_utils`) or example scripts.
 
 ## Troubleshooting
 
