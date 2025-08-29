@@ -5,5 +5,5 @@ from .FCL_Classical_Discriminator_2 import FCL_Classical_Discriminator_2
 from .FCL_Classical_Discriminator_3 import FCL_Classical_Discriminator_3
 from .CNN_Classical_Discriminator import CNN_Classical_Discriminator
 from .QuantumDiscriminator import QuantumDiscriminator
-from .HybridQuantumDiscriminator import HybridQuantumDiscriminator
+from .HybridQuantumDiscriminator import DualDiscriminatorHybridQuantumDiscriminator, HybridQuantumDiscriminator
 from .DC_Classical_Discriminator import DC_Classical_Discriminator

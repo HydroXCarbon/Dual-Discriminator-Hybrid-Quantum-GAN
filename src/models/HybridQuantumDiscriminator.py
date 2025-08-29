@@ -39,53 +39,63 @@ class QuantumFunction(Function):
 
     return None, None, None, grad_x, grad_theta
 
-class HybridQuantumDiscriminator(nn.Module):
-    def __init__(self):
-        super().__init__()
+class DualDiscriminatorHybridQuantumDiscriminator(nn.Module):
+  """Dual Discriminator Hybrid Quantum Discriminator (DDHQ-Discriminator)
 
-        self.device = 'cuda'
+  This class is a refactor/renaming of the previous `HybridQuantumDiscriminator`.
+  It keeps the same implementation but uses a clearer project-wide name. A
+  compatibility alias is created at the end of the file so older imports keep
+  working.
+  """
+  def __init__(self):
+    super().__init__()
+
+    self.device = 'cuda'
         
-        # Initialize QNN components
-        qnn_data = create_qnn(device='GPU')
-        self.estimator = qnn_data["estimator"]
-        self.qc = qnn_data["transpiled_circuit"]
-        self.feature_map_params = qnn_data["feature_map_params"]
-        self.ansatz_params = qnn_data["ansatz_params"]
-        self.observable = qnn_data["observable"]
+    # Initialize QNN components
+    qnn_data = create_qnn(device='GPU')
+    self.estimator = qnn_data["estimator"]
+    self.qc = qnn_data["transpiled_circuit"]
+    self.feature_map_params = qnn_data["feature_map_params"]
+    self.ansatz_params = qnn_data["ansatz_params"]
+    self.observable = qnn_data["observable"]
 
-        # Define the quantum trainable parameters
-        self.theta = nn.Parameter(torch.ones(len(self.ansatz_params), device=self.device))
+    # Define the quantum trainable parameters
+    self.theta = nn.Parameter(torch.ones(len(self.ansatz_params), device=self.device))
 
-        self.pre_quantum = nn.Sequential(
-            nn.Conv2d(1, 2, kernel_size=5),
-            nn.ReLU(),
-            nn.MaxPool2d(kernel_size=2),
-            nn.Conv2d(2, 16, kernel_size=5),
-            nn.ReLU(),
-            nn.MaxPool2d(kernel_size=2),
-            nn.Dropout2d(),
-            nn.Flatten(),
-            nn.Linear(256, 64),
-            nn.ReLU(),
-            nn.Linear(64, 2),
-        )
+    self.pre_quantum = nn.Sequential(
+      nn.Conv2d(1, 2, kernel_size=5),
+      nn.ReLU(),
+      nn.MaxPool2d(kernel_size=2),
+      nn.Conv2d(2, 16, kernel_size=5),
+      nn.ReLU(),
+      nn.MaxPool2d(kernel_size=2),
+      nn.Dropout2d(),
+      nn.Flatten(),
+      nn.Linear(256, 64),
+      nn.ReLU(),
+      nn.Linear(64, 2),
+    )
 
-        self.post_quantum = nn.Sequential(
-            nn.Linear(1, 1),
-            nn.Sigmoid()
-        )
+    self.post_quantum = nn.Sequential(
+      nn.Linear(1, 1),
+      nn.Sigmoid()
+    )
 
-    def forward(self, x):
-        # Pass through classical layers
-        x = self.pre_quantum(x)
+  def forward(self, x):
+    # Pass through classical layers
+    x = self.pre_quantum(x)
         
-        # Ensure self.theta is of shape (batch_size, num_theta)
-        theta_repeated = self.theta.unsqueeze(0).expand(x.size(0), -1)  # Repeat theta for batch_size
+    # Ensure self.theta is of shape (batch_size, num_theta)
+    theta_repeated = self.theta.unsqueeze(0).expand(x.size(0), -1)  # Repeat theta for batch_size
 
-        # Use custom autograd function for quantum circuit execution
-        quantum_outputs = QuantumFunction.apply(self.qc, self.observable, self.estimator, x, theta_repeated)
+    # Use custom autograd function for quantum circuit execution
+    quantum_outputs = QuantumFunction.apply(self.qc, self.observable, self.estimator, x, theta_repeated)
 
-        # Pass through post-quantum layers
-        x = self.post_quantum(quantum_outputs)
+    # Pass through post-quantum layers
+    x = self.post_quantum(quantum_outputs)
 
-        return x
+    return x
+
+# Backwards-compatible alias for code that still imports the old class name
+HybridQuantumDiscriminator = DualDiscriminatorHybridQuantumDiscriminator

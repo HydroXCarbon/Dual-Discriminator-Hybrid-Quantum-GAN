@@ -1,13 +1,13 @@
 Configuration:
   # Wandb
   wandb:
-    project: "HybridQuantumGAN"
+    project: "DDHQ-GAN"
     entity: "purin-pongpanich-mahidol-university"
   # Divergent detector threshold
   sample_point_threshold: 3 # data point
   slope_threshold: 45 # degree
   epoch_threshold: 5 # check divergent after
-  loss_threshold: 0.001 # check loss if less than threshold 
+  loss_threshold: 0.001 # check loss if less than threshold
   # Preprocessing
   device: cuda # 'cuda' or 'cpu'
   seed: # Set seed
@@ -84,7 +84,7 @@ Hyperparameter:
     Hybrid_quantum_discriminator:
       learning_rate: 0.000049929
       betas: 0.9, 0.999
-      model_class: HybridQuantumDiscriminator
+      model_class: DualDiscriminatorHybridQuantumDiscriminator
       loss_function: BCELoss
       optimizer: Adam
     quantum_discriminator:

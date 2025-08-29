@@ -1,14 +1,16 @@
 program: ./src/main.py
-project: HybridQuantumGAN
+project: DDHQ-GAN
 name: QUA-Normal
-method: bayes 
+method: bayes
 metric:
   goal: minimize
-  name: GAN_generator_loss  
+  name: GAN_generator_loss
 parameters:
   model_selector:
-    values: ["GAN_generator,
-      Hybrid_quantum_discriminator,"]
+    values: [
+        "GAN_generator,
+        Hybrid_quantum_discriminator,",
+      ]
   learning_rate_multiplier:
     min: 3
     max: 5
@@ -18,10 +20,10 @@ parameters:
     max: 1e-4
     distribution: uniform
   batch_size:
-    values: [32, 64, 128] 
+    values: [32, 64, 128]
   epochs:
-    values: [41] 
+    values: [41]
   seed:
     min: 0
     max: 1000
-    distribution: int_uniform   
+    distribution: int_uniform
