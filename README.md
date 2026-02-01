@@ -134,9 +134,27 @@ python src/main.py
 - CUDA/quantum backend issues: check installed versions and backend configuration in `config.yml`
 - Training diverging: try lowering learning rate, reducing batch size, or using gradient clipping
 
-## Citation
+# Citation
 
-If you use this code in research, please cite the repository and any included papers or references that accompany the project.
+If you use this code or the associated research in your work, please cite the following paper published in **IEEE Transactions on Quantum Engineering**.
+
+### IEEE Style
+P. Pongpanich and T. Phienthrakul, "Dual-Discriminator Hybrid Quantum Generative Adversarial Networks for Improved GAN Performance," in *IEEE Transactions on Quantum Engineering*, vol. 7, pp. 1-14, 2026. doi: 10.1109/TQE.2025.3642110.
+
+### BibTeX
+```bibtex
+@ARTICLE{11288093,
+  author={Pongpanich, Purin and Phienthrakul, Tanasanee},
+  journal={IEEE Transactions on Quantum Engineering}, 
+  title={Dual-Discriminator Hybrid {Quantum} {Generative} {Adversarial} {Networks} for Improved {GAN} Performance}, 
+  year={2026},
+  volume={7},
+  number={},
+  pages={1-14},
+  doi={10.1109/TQE.2025.3642110},
+  keywords={Generative adversarial networks;Quantum circuit;Training;Quantum computing;Integrated circuit modeling;Logic gates;Neural networks;Hybrid power systems;Computer architecture;Generators;Generative adversarial networks (GANs);image generation;machine learning;quantum computing;quantum machine learning (QML)}
+}
+```
 
 ## Contributing
 
@@ -144,7 +162,7 @@ Contributions are welcome. Please open an issue to discuss major changes, and su
 
 ## License
 
-See the LICENSE file in the project root for licensing details.
+This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file in the project root for the full license text.
 
 ## Contact
 
